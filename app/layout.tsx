@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/contexts/language-context"
+import ScrollToTopButton from "@/components/scroll-to-top-button"
 
 const inter = Inter({ 
   subsets: ["latin"],

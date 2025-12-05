@@ -30,15 +30,26 @@ export default function ContactForm() {
     setIsSubmitting(true)
 
     try {
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      setSubmitMessage("Thanks for reaching out! I'll get back to you soon.")
-      setFormState({ name: "", email: "", subject: "", message: "" })
-      setTimeout(() => setSubmitMessage(""), 5000)
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      })
+
+      if (response.ok) {
+        setSubmitMessage("Thanks for reaching out! I'll get back to you soon.")
+        setFormState({ name: "", email: "", subject: "", message: "" })
+      } else {
+        const errorData = await response.json()
+        setSubmitMessage(errorData.error || "Something went wrong. Please try again.")
+      }
     } catch (error) {
       setSubmitMessage("Something went wrong. Please try again.")
     } finally {
       setIsSubmitting(false)
+      setTimeout(() => setSubmitMessage(""), 5000)
     }
   }
 

@@ -17,9 +17,8 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.about": "About",
     "nav.projects": "Projects",
     "nav.contact": "Contact",
-    "home.greeting": "Hi, I'm Yilzi",
-    "home.description":
-      "Full Stack Developer from Malang, Indonesia. I specialize in building modern web applications with React, Next.js, and TypeScript.",
+    "home.greeting": "Hi, I'm Adriano",
+    "home.description": "",
     "home.viewProjects": "View Projects",
     "home.getInTouch": "Get in Touch",
     "projects.title": "My Projects",
@@ -37,12 +36,11 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.form.success": "Thanks for reaching out! I'll get back to you soon.",
     "contact.form.error": "Something went wrong. Please try again.",
     "location.title": "Location",
-    "location.description":
-      "Based in Malang, Indonesia. Always open to collaborating with teams remotely or meeting in person.",
+    "location.description": "",
     "social.title": "Connect With Me",
     "social.description":
       "Follow my work, get updates, and stay connected across various social platforms. Let's build amazing things together!",
-    "footer.description": "Full Stack Developer crafting beautiful digital experiences.",
+    "footer.description": "Backend Developer crafting robust APIs and scalable systems.",
     "footer.navigation": "Navigation",
     "footer.connect": "Connect",
     "footer.getInTouch": "Get in Touch",
@@ -57,8 +55,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.projects": "Proyek",
     "nav.contact": "Kontak",
     "home.greeting": "Hai, saya Yilzi",
-    "home.description":
-      "Full Stack Developer dari Malang, Indonesia. Saya mengkhususkan diri dalam membangun aplikasi web modern dengan React, Next.js, dan TypeScript.",
+    "home.description": "",
     "home.viewProjects": "Lihat Proyek",
     "home.getInTouch": "Hubungi Saya",
     "projects.title": "Proyek Saya",
@@ -81,7 +78,7 @@ const translations: Record<Language, Record<string, string>> = {
     "social.title": "Terhubung Dengan Saya",
     "social.description":
       "Ikuti pekerjaan saya, dapatkan pembaruan, dan tetap terhubung di berbagai platform sosial. Mari kita membangun hal-hal luar biasa bersama!",
-    "footer.description": "Full Stack Developer yang menciptakan pengalaman digital yang indah.",
+    "footer.description": "Developer Backend yang menciptakan API kuat dan sistem yang scalable.",
     "footer.navigation": "Navigasi",
     "footer.connect": "Terhubung",
     "footer.getInTouch": "Hubungi Kami",

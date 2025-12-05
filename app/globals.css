@@ -135,8 +135,14 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
+  html, body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -254,6 +260,33 @@
     animation: shimmer 2s infinite;
   }
 
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animated-border {
+    position: relative;
+    background: linear-gradient(45deg, #00d4ff, #0099ff, #6366f1, #a855f7);
+    background-size: 400% 400%;
+    animation: gradientShift 3s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animated-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: linear-gradient(45deg, #00d4ff, #0099ff, #6366f1, #a855f7);
+    background-size: 400% 400%;
+    animation: gradientShift 3s ease infinite;
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
   .gradient-text {
     @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
   }
@@ -281,7 +314,7 @@
   .animated-backend-bg {
     position: relative;
     background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   .animated-backend-bg::before {
@@ -349,11 +382,11 @@
     animation: floatCode 15s linear infinite;
   }
 
-  .floating-code:nth-child(1) { top: 10%; left: -100px; animation-delay: 0s; }
-  .floating-code:nth-child(2) { top: 30%; left: -100px; animation-delay: 3s; }
-  .floating-code:nth-child(3) { top: 50%; left: -100px; animation-delay: 6s; }
-  .floating-code:nth-child(4) { top: 70%; left: -100px; animation-delay: 9s; }
-  .floating-code:nth-child(5) { top: 20%; left: -100px; animation-delay: 12s; }
+  .floating-code:nth-child(1) { top: 10%; left: -50px; animation-delay: 0s; }
+  .floating-code:nth-child(2) { top: 30%; left: -50px; animation-delay: 3s; }
+  .floating-code:nth-child(3) { top: 50%; left: -50px; animation-delay: 6s; }
+  .floating-code:nth-child(4) { top: 70%; left: -50px; animation-delay: 9s; }
+  .floating-code:nth-child(5) { top: 20%; left: -50px; animation-delay: 12s; }
 
   .floating-particle {
     position: absolute;
@@ -852,5 +885,30 @@
     background: linear-gradient(var(--background), var(--background)) padding-box,
                 linear-gradient(0deg, #00d4ff, #0099ff, #6366f1, #a855f7) border-box;
     animation: runningBorder 3s linear infinite;
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .animate-fall {
+    animation: fall linear infinite;
   }
 }

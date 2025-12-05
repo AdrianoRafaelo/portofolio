@@ -115,7 +115,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-muted-foreground">© {currentYear} Yilzi. All rights reserved.</p>
+            <p className="text-xs text-muted-foreground">© {currentYear} Adriano. All rights reserved.</p>
             <div className="flex items-center space-x-6 text-xs text-muted-foreground">
               <Link href="#" className="hover:text-foreground transition-colors">
                 {t("footer.privacy")}

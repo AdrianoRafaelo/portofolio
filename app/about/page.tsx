@@ -66,28 +66,189 @@ export default function AboutPage() {
   ]
 
   return (
-    <div className="min-h-screen flex flex-col animated-backend-bg">
-      <div className="floating-code">{"const user = { name: 'Adriano', role: 'Backend Developer' };"}</div>
-      <div className="floating-code">{"app.get('/api/users', (req, res) => { res.json(users); });"}</div>
-      <div className="floating-code">{"SELECT * FROM users WHERE active = 1;"}</div>
-      <div className="floating-code">{"public function index() { return view('welcome'); }"}</div>
-      <div className="floating-code">{"docker run -p 3000:3000 myapp"}</div>
-      <div className="floating-particle"></div>
-      <div className="floating-particle"></div>
-      <div className="floating-particle"></div>
-      <div className="floating-particle"></div>
-      <div className="floating-particle"></div>
-      <div className="floating-shape"></div>
-      <div className="floating-shape"></div>
-      <div className="floating-shape"></div>
-      <div className="floating-db-table"></div>
-      <div className="floating-db-table"></div>
-      <div className="floating-db-table"></div>
-      <div className="floating-db-table"></div>
-      <div className="floating-db-table"></div>
-      <div className="floating-db-relation"></div>
-      <div className="floating-db-relation"></div>
-      <div className="absolute inset-0 bg-black/30"></div>
+    <div className="min-h-screen flex flex-col bg-slate-950">
+      {/* Server Rack Data Center Animation */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        {/* Server Racks */}
+        <div className="absolute inset-0">
+          {/* Left Server Rack */}
+          <div className="absolute left-4 top-1/4 w-16 h-64 bg-slate-800 border-2 border-slate-600 rounded-lg shadow-2xl">
+            <div className="p-2 space-y-1">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="flex items-center space-x-1">
+                  <div className={`w-2 h-2 rounded-full ${i % 3 === 0 ? 'bg-green-400 animate-pulse' : i % 3 === 1 ? 'bg-blue-400 animate-ping' : 'bg-yellow-400 animate-bounce'}`}></div>
+                  <div className="flex-1 h-1 bg-slate-700 rounded"></div>
+                </div>
+              ))}
+            </div>
+            {/* Rack Label */}
+            <div className="absolute -bottom-6 left-0 right-0 text-center">
+              <div className="text-xs text-cyan-400 font-mono bg-slate-900 px-2 py-1 rounded">SRV-01</div>
+            </div>
+          </div>
+
+          {/* Right Server Rack */}
+          <div className="absolute right-4 top-1/3 w-16 h-64 bg-slate-800 border-2 border-slate-600 rounded-lg shadow-2xl">
+            <div className="p-2 space-y-1">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="flex items-center space-x-1">
+                  <div className={`w-2 h-2 rounded-full ${i % 4 === 0 ? 'bg-red-400 animate-pulse' : i % 4 === 1 ? 'bg-green-400 animate-ping' : i % 4 === 2 ? 'bg-blue-400 animate-bounce' : 'bg-purple-400 animate-pulse'}`}></div>
+                  <div className="flex-1 h-1 bg-slate-700 rounded"></div>
+                </div>
+              ))}
+            </div>
+            {/* Rack Label */}
+            <div className="absolute -bottom-6 left-0 right-0 text-center">
+              <div className="text-xs text-cyan-400 font-mono bg-slate-900 px-2 py-1 rounded">DB-01</div>
+            </div>
+          </div>
+
+          {/* Center Server Rack */}
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-80 bg-slate-800 border-2 border-slate-600 rounded-lg shadow-2xl">
+            <div className="p-3 space-y-2">
+              {[...Array(10)].map((_, i) => (
+                <div key={i} className="flex items-center space-x-2">
+                  <div className={`w-3 h-3 rounded-full ${i % 5 === 0 ? 'bg-cyan-400 animate-pulse' : i % 5 === 1 ? 'bg-blue-400 animate-ping' : i % 5 === 2 ? 'bg-green-400 animate-bounce' : i % 5 === 3 ? 'bg-yellow-400 animate-pulse' : 'bg-purple-400 animate-ping'}`}></div>
+                  <div className="flex-1 h-2 bg-slate-700 rounded"></div>
+                  <div className="w-2 h-2 bg-slate-600 rounded"></div>
+                </div>
+              ))}
+            </div>
+            {/* Rack Label */}
+            <div className="absolute -bottom-8 left-0 right-0 text-center">
+              <div className="text-xs text-cyan-400 font-mono bg-slate-900 px-3 py-1 rounded">API-SERVER</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Data Cables */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="cable-flow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgb(34, 211, 238)" stopOpacity="0.8"/>
+              <stop offset="50%" stopColor="rgb(59, 130, 246)" stopOpacity="1"/>
+              <stop offset="100%" stopColor="rgb(34, 211, 238)" stopOpacity="0.8"/>
+            </linearGradient>
+          </defs>
+
+          {/* Cable connections */}
+          <path d="M15 30 Q35 25 50 40 T85 35" stroke="url(#cable-flow)" strokeWidth="1" fill="none" className="animate-pulse" style={{animationDuration: '3s'}}>
+            <animate attributeName="stroke-dasharray" values="0,50;50,0" dur="3s" repeatCount="indefinite"/>
+          </path>
+          <path d="M15 70 Q35 75 50 60 T85 65" stroke="url(#cable-flow)" strokeWidth="1" fill="none" className="animate-pulse" style={{animationDuration: '4s', animationDelay: '1s'}}>
+            <animate attributeName="stroke-dasharray" values="0,50;50,0" dur="4s" repeatCount="indefinite"/>
+          </path>
+          <path d="M50 20 Q50 35 50 50 Q50 65 50 80" stroke="url(#cable-flow)" strokeWidth="1.5" fill="none" className="animate-pulse" style={{animationDuration: '5s', animationDelay: '2s'}}>
+            <animate attributeName="stroke-dasharray" values="0,60;60,0" dur="5s" repeatCount="indefinite"/>
+          </path>
+        </svg>
+
+        {/* Network Activity Indicators */}
+        <div className="absolute inset-0">
+          {[...Array(12)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-ping opacity-60"
+              style={{
+                left: `${10 + (i * 7) % 80}%`,
+                top: `${20 + (i * 9) % 60}%`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: '2s'
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Cooling Fans */}
+        <div className="absolute top-8 right-8 w-12 h-12 border-2 border-slate-600 rounded-full">
+          <div className="absolute inset-1 border border-cyan-400/30 rounded-full animate-spin" style={{animationDuration: '2s'}}></div>
+          <div className="absolute inset-2 border border-blue-400/20 rounded-full animate-spin" style={{animationDuration: '1.5s', animationDirection: 'reverse'}}></div>
+        </div>
+
+        <div className="absolute bottom-8 left-8 w-10 h-10 border-2 border-slate-600 rounded-full">
+          <div className="absolute inset-1 border border-green-400/30 rounded-full animate-spin" style={{animationDuration: '3s'}}></div>
+          <div className="absolute inset-2 border border-blue-400/20 rounded-full animate-spin" style={{animationDuration: '2s', animationDirection: 'reverse'}}></div>
+        </div>
+
+        {/* Status LEDs */}
+        <div className="absolute top-16 left-16 flex space-x-2">
+          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          <div className="w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
+          <div className="w-2 h-2 bg-yellow-400 rounded-full animate-bounce"></div>
+        </div>
+
+        {/* Data Flow Particles */}
+        <div className="absolute inset-0">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-bounce opacity-70"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 4}s`,
+                animationDuration: `${1.5 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Database Tables */}
+        <div className="absolute inset-0">
+          {[
+            { name: 'users', x: 5, y: 10, columns: ['id', 'username', 'email', 'role'] },
+            { name: 'projects', x: 85, y: 15, columns: ['id', 'name', 'status', 'deadline'] },
+            { name: 'skills', x: 10, y: 80, columns: ['id', 'name', 'level', 'category'] },
+            { name: 'experiences', x: 80, y: 75, columns: ['id', 'company', 'position', 'years'] }
+          ].map((table, i) => (
+            <div
+              key={i}
+              className="absolute bg-slate-800/70 border border-slate-600 rounded-lg shadow-lg animate-float"
+              style={{
+                left: `${table.x}%`,
+                top: `${table.y}%`,
+                animationDelay: `${i * 1.5}s`,
+                animationDuration: `${8 + (i % 2) * 2}s`
+              }}
+            >
+              {/* Table Header */}
+              <div className="bg-slate-700 px-3 py-2 rounded-t-lg">
+                <div className="text-xs text-cyan-400 font-mono font-bold">{table.name}</div>
+              </div>
+
+              {/* Table Columns */}
+              <div className="p-2 space-y-1">
+                {table.columns.map((column, j) => (
+                  <div key={j} className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                    <div className="text-xs text-gray-300 font-mono">{column}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Database Relationships */}
+        <svg className="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <marker id="db-arrow" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+              <polygon points="0 0, 6 2, 0 4" fill="rgb(34, 211, 238)" opacity="0.8"/>
+            </marker>
+          </defs>
+
+          {/* Relationship lines */}
+          <line x1="10" y1="20" x2="15" y2="85" stroke="rgb(34, 211, 238)" strokeWidth="1" opacity="0.6" markerEnd="url(#db-arrow)" className="animate-pulse" style={{animationDuration: '4s'}}>
+            <animate attributeName="stroke-dasharray" values="0,25;25,0" dur="4s" repeatCount="indefinite"/>
+          </line>
+          <line x1="90" y1="25" x2="85" y2="80" stroke="rgb(59, 130, 246)" strokeWidth="1" opacity="0.6" markerEnd="url(#db-arrow)" className="animate-pulse" style={{animationDuration: '5s', animationDelay: '1s'}}>
+            <animate attributeName="stroke-dasharray" values="0,25;25,0" dur="5s" repeatCount="indefinite"/>
+          </line>
+        </svg>
+
+        {/* Background Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-900/60 to-slate-950/80"></div>
+      </div>
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-1">
@@ -272,7 +433,7 @@ export default function AboutPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.2, duration: 0.6 }}
                     whileHover={{ y: -10, scale: 1.02 }}
-                    className="p-8 rounded-3xl bg-card/80 border border-border/50 hover:border-primary/50 transition-all group hover:shadow-2xl hover:shadow-primary/20"
+                    className="p-8 rounded-3xl bg-transparent border-2 border-cyan-400/30 hover:border-cyan-400/60 transition-all group hover:shadow-2xl hover:shadow-cyan-400/30 backdrop-blur-sm"
                   >
                     <div className="flex items-center gap-4 mb-6">
                       <motion.div

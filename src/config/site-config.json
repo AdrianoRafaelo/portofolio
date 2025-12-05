@@ -2,37 +2,37 @@
   "personal": {
     "name": "Adriano",
     "title": "Backend Developer",
-    "bio": "Crafting elegant solutions to complex problems. Passionate about building web experiences that blend thoughtful design with robust engineering.",
-    "email": "Adriano@owner.com",
+    "bio": "Crafting robust backend solutions and scalable APIs. Passionate about building efficient systems that power modern web applications.",
+    "email": "adrianorafaelo089@gmail.com",
     "phone": "+62-813-5912-3789",
     "location": "Tarutung, North Sumatra, Indonesia",
-    "tagline": "Developer, Designer, Problem Solver",
+    "tagline": "Backend Developer, UI/UX Designer",
     "avatar": "/images/profile.jpg"
   },
   "socialMedia": {
     "instagram": {
-      "username": "Adriano_dominan",
-      "url": "https://instagram.com/Adriano_dominan",
+      "username": "a.n_anoo",
+      "url": "https://www.instagram.com/a.n_anoo?igsh=MTcyMGhyYm9zYmZuZQ==",
       "icon": "Instagram"
     },
     "tiktok": {
       "username": "Adriano",
-      "url": "https://tiktok.com/@Adrianoii",
+      "url": "/",
       "icon": "Music"
     },
     "telegram": {
       "username": "Adriano",
-      "url": "https://t.me/Adrianoii",
+      "url": "/",
       "icon": "Send"
     },
     "whatsapp": {
       "phone": "08227248379",
-      "url": "https://wa.me/6281359123789",
+      "url": "https://wa.me/628227248379",
       "icon": "MessageCircle"
     },
     "github": {
       "username": "AdrianoiHCT",
-      "url": "https://github.com/AdrianoiHCT",
+      "url": "https://github.com/AdrianoRafaelo",
       "icon": "Github"
     }
   },
@@ -77,7 +77,7 @@
   "projects": [
     {
       "id": 1,
-      "title": "E-Commerce Platform",
+      "title": "Website HIMATIF",
       "description": "A modern e-commerce platform with real-time inventory management and payment integration",
       "shortDescription": "Full-stack e-commerce with real-time updates",
       "image": "/images/projects/himatif.png",
@@ -88,10 +88,10 @@
     },
     {
       "id": 2,
-      "title": "Task Management App",
+      "title": "Mobile App",
       "description": "Collaborative task management tool with real-time synchronization",
       "shortDescription": "Collaborative task management solution",
-      "image": "/images/projects/pam.png",
+      "image": "/images/projects/cafetaria.png",
       "technologies": ["Next.js", "TypeScript", "Supabase"],
       "demo": "https://example.com",
       "github": "https://github.com/AdrianoRafaelo/PAM.git",
@@ -99,13 +99,46 @@
     },
     {
       "id": 3,
-      "title": "Design System",
+      "title": "Website SIPODA MR",
       "description": "Comprehensive design system and component library",
       "shortDescription": "Scalable component library",
       "image": "/images/projects/sipoda.png",
       "technologies": ["React", "Storybook", "TypeScript"],
       "demo": "https://example.com",
       "github": "https://github.com/AdrianoRafaelo/TA_KEL04.git",
+      "featured": false
+    },
+    {
+      "id": 4,
+      "title": "Design Financial Statement App",
+      "description": "Comprehensive design system and component library",
+      "shortDescription": "Scalable component library",
+      "image": "/images/projects/financial.png",
+      "technologies": ["React", "Storybook", "TypeScript"],
+      "demo": "https://example.com",
+      "github": "https://github.com/AdrianoRafaelo/TA_KEL04.git",
+      "featured": false
+    },
+        {
+      "id": 5,
+      "title": "Re-Design RKToba",
+      "description": "Comprehensive design system and component library",
+      "shortDescription": "Scalable component library",
+      "image": "/images/projects/rktoba.png",
+      "technologies": ["React", "Storybook", "TypeScript"],
+      "demo": "https://example.com",
+      "github": "https://www.figma.com/design/ODcuOiNQp2NB3fX6w0txX3/Untitled?node-id=1-2&t=i02jGWWia4n77Hog-1",
+      "featured": false
+    },
+        {
+      "id": 6,
+      "title": "Design Web Toura AI",
+      "description": "Comprehensive design system and component library",
+      "shortDescription": "Scalable component library",
+      "image": "/images/projects/toura.png",
+      "technologies": ["React", "Storybook", "TypeScript"],
+      "demo": "https://example.com",
+      "github": "https://www.figma.com/design/2RZe0QkXrhBdRNEBZQKjE2/PROTOTYPE_TEKNO_KEL_05?node-id=0-1&t=vkrtaU7NLDEdUU7t-1",
       "featured": false
     }
   ],
@@ -120,7 +153,7 @@
       },
       "hero": {
         "greeting": "Hello, I'm Adriano",
-        "tagline": "Full Stack Developer & Creative Problem Solver",
+        "tagline": "Backend Developer crafting robust APIs and scalable systems",
         "cta": "Let's Work Together"
       },
       "about": {
@@ -139,7 +172,7 @@
       },
       "hero": {
         "greeting": "Halo, Saya Adriano",
-        "tagline": "Developer Full Stack & Problem Solver Kreatif",
+        "tagline": "Developer Backend yang menciptakan API kuat dan sistem yang scalable",
         "cta": "Mari Berkolaborasi"
       },
       "about": {

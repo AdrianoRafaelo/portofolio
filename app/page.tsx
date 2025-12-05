@@ -8,12 +8,110 @@ import {
   ArrowRight, Star, Award, Zap, Users, Code2, Sparkles
 } from "lucide-react"
 import Image from "next/image"
+import { useState, useEffect } from "react"
 
 // Ganti path ini sesuai gambar kamu
-const avatarUrl = "/images/ppcis.jpg"  
-const cvUrl = "/cv-Adriano.pdf"           // taruh di folder public
+const avatarUrl = "/images/ppcis.jpg"
+const cvUrl = "https://drive.google.com/file/d/12KNx_1cRtz_pEy14JYM1ntglEvSBEDnh/view?usp=drive_link"           // CV link
 
 export default function Home() {
+  const [dataPackets, setDataPackets] = useState<Array<{
+    top: string;
+    left: string;
+    delay: string;
+    duration: string;
+    rotation: number;
+  }>>([])
+  const [binaryPositions, setBinaryPositions] = useState<Array<{
+    left: string;
+    delay: string;
+    duration: string;
+    isOne: boolean;
+  }>>([])
+
+  const [fallingColumns, setFallingColumns] = useState<Array<{
+    left: string;
+    delay: string;
+    duration: string;
+    characters: Array<{ char: string; color: string; delay: string }>;
+  }>>([])
+
+  const [scrollY, setScrollY] = useState(0)
+
+  const [binaryStreams, setBinaryStreams] = useState<Array<{
+    left: string;
+    top: string;
+    delay: string;
+    duration: string;
+    bits: string[];
+  }>>([])
+
+  const [floatingParticles, setFloatingParticles] = useState<Array<{
+    left: string;
+    top: string;
+    delay: string;
+    duration: string;
+  }>>([])
+
+  useEffect(() => {
+    // Generate random positions for data packets only on client side
+    const packets = [...Array(8)].map((_, i) => ({
+      top: `${20 + Math.random() * 60}%`,
+      left: `${10 + Math.random() * 80}%`,
+      delay: `${Math.random() * 3}s`,
+      duration: `${1 + Math.random() * 2}s`,
+      rotation: Math.random() * 360
+    }))
+    setDataPackets(packets)
+
+    // Generate random positions for binary rain
+    const binaries = [...Array(15)].map((_, i) => ({
+      left: `${i * 6 + Math.random() * 5}%`,
+      delay: `${Math.random() * 2}s`,
+      duration: `${3 + Math.random() * 2}s`,
+      isOne: Math.random() > 0.5
+    }))
+    setBinaryPositions(binaries)
+
+    // Generate falling columns for Matrix Rain
+    const columns = [...Array(15)].map((_, col) => ({
+      left: `${col * 6.5 + 1}%`,
+      delay: `${col * 0.2}s`,
+      duration: `${6 + Math.random() * 3}s`,
+      characters: [...Array(25)].map((_, row) => ({
+        char: Math.random() > 0.5 ? '1' : '0',
+        color: Math.random() > 0.5 ? 'text-blue-400' : 'text-cyan-400',
+        delay: `${row * 0.08}s`
+      }))
+    }))
+    setFallingColumns(columns)
+
+    // Generate binary streams
+    const streams = [...Array(8)].map((_, i) => ({
+      left: `${12 + i * 10}%`,
+      top: `${10 + (i % 2) * 70}%`,
+      delay: `${i * 0.3}s`,
+      duration: `${3 + (i % 2)}s`,
+      bits: [...Array(15)].map(() => Math.random() > 0.5 ? '1' : '0')
+    }))
+    setBinaryStreams(streams)
+
+    // Generate floating particles
+    const particles = [...Array(8)].map((_, i) => ({
+      left: `${15 + (i * 11) % 70}%`,
+      top: `${25 + (i * 13) % 50}%`,
+      delay: `${i * 0.7}s`,
+      duration: `${5 + (i % 2) * 2}s`
+    }))
+    setFloatingParticles(particles)
+
+    // Add scroll listener for parallax effect
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const features = [
     { icon: Code2, title: "Full Stack Development", description: "End-to-end web development dengan teknologi modern dan best practices", color: "from-blue-500 to-cyan-500" },
     { icon: Zap, title: "High Performance", description: "Optimized applications dengan loading cepat dan user experience terbaik", color: "from-green-500 to-emerald-500" },
@@ -29,47 +127,216 @@ export default function Home() {
   ]
 
   return (
-    <div className="min-h-screen flex flex-col animated-backend-bg">
-      {/* Floating Code Snippets */}
-      <div className="floating-code">{"const backend = () => { return 'awesome' }"}</div>
-      <div className="floating-code">{"SELECT * FROM users WHERE active = true;"}</div>
-      <div className="floating-code">{"app.get('/api/data', async (req, res) => {})"}</div>
-      <div className="floating-code">{"<?php echo 'Hello World'; ?>"}</div>
-      <div className="floating-code">{"npm install express mongoose"}</div>
-      
-      {/* Floating Particles */}
-      <div className="floating-particle"></div>
-      <div className="floating-particle"></div>
-      <div className="floating-particle"></div>
-      <div className="floating-particle"></div>
-      <div className="floating-particle"></div>
-      
-      {/* Floating Shapes */}
-      <div className="floating-shape"></div>
-      <div className="floating-shape"></div>
-      <div className="floating-shape"></div>
-      
-      {/* Floating Database Tables */}
-      <div className="floating-db-table"></div>
-      <div className="floating-db-table"></div>
-      <div className="floating-db-table"></div>
-      <div className="floating-db-table"></div>
-      <div className="floating-db-table"></div>
-      
-      {/* Floating Database Relations */}
-      <div className="floating-db-relation"></div>
-      <div className="floating-db-relation"></div>
-      
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/30"></div>
-      
+    <div className="min-h-screen flex flex-col bg-slate-950">
+      {/* Full Page Background Animation */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        {/* Server Rack Data Center Animation */}
+        <div className="absolute inset-0">
+          {/* Server Racks */}
+          <div className="absolute left-4 top-1/4 w-16 h-64 bg-slate-800 border-2 border-slate-600 rounded-lg shadow-2xl">
+            <div className="p-2 space-y-1">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="flex items-center space-x-1">
+                  <div className={`w-2 h-2 rounded-full ${i % 3 === 0 ? 'bg-green-400 animate-pulse' : i % 3 === 1 ? 'bg-blue-400 animate-ping' : 'bg-yellow-400 animate-bounce'}`}></div>
+                  <div className="flex-1 h-1 bg-slate-700 rounded"></div>
+                </div>
+              ))}
+            </div>
+            {/* Rack Label */}
+            <div className="absolute -bottom-6 left-0 right-0 text-center">
+              <div className="text-xs text-cyan-400 font-mono bg-slate-900 px-2 py-1 rounded">SRV-01</div>
+            </div>
+          </div>
+
+          {/* Right Server Rack */}
+          <div className="absolute right-4 top-1/3 w-16 h-64 bg-slate-800 border-2 border-slate-600 rounded-lg shadow-2xl">
+            <div className="p-2 space-y-1">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="flex items-center space-x-1">
+                  <div className={`w-2 h-2 rounded-full ${i % 4 === 0 ? 'bg-red-400 animate-pulse' : i % 4 === 1 ? 'bg-green-400 animate-ping' : i % 4 === 2 ? 'bg-blue-400 animate-bounce' : 'bg-purple-400 animate-pulse'}`}></div>
+                  <div className="flex-1 h-1 bg-slate-700 rounded"></div>
+                </div>
+              ))}
+            </div>
+            {/* Rack Label */}
+            <div className="absolute -bottom-6 left-0 right-0 text-center">
+              <div className="text-xs text-cyan-400 font-mono bg-slate-900 px-2 py-1 rounded">DB-01</div>
+            </div>
+          </div>
+
+          {/* Center Server Rack */}
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-80 bg-slate-800 border-2 border-slate-600 rounded-lg shadow-2xl">
+            <div className="p-3 space-y-2">
+              {[...Array(10)].map((_, i) => (
+                <div key={i} className="flex items-center space-x-2">
+                  <div className={`w-3 h-3 rounded-full ${i % 5 === 0 ? 'bg-cyan-400 animate-pulse' : i % 5 === 1 ? 'bg-blue-400 animate-ping' : i % 5 === 2 ? 'bg-green-400 animate-bounce' : i % 5 === 3 ? 'bg-yellow-400 animate-pulse' : 'bg-purple-400 animate-ping'}`}></div>
+                  <div className="flex-1 h-2 bg-slate-700 rounded"></div>
+                  <div className="w-2 h-2 bg-slate-600 rounded"></div>
+                </div>
+              ))}
+            </div>
+            {/* Rack Label */}
+            <div className="absolute -bottom-8 left-0 right-0 text-center">
+              <div className="text-xs text-cyan-400 font-mono bg-slate-900 px-3 py-1 rounded">API-SERVER</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Data Cables */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="home-cable-flow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgb(34, 211, 238)" stopOpacity="0.8"/>
+              <stop offset="50%" stopColor="rgb(59, 130, 246)" stopOpacity="1"/>
+              <stop offset="100%" stopColor="rgb(34, 211, 238)" stopOpacity="0.8"/>
+            </linearGradient>
+          </defs>
+
+          {/* Cable connections */}
+          <path d="M15 30 Q35 25 50 40 T85 35" stroke="url(#home-cable-flow)" strokeWidth="1.5" fill="none" className="animate-pulse" style={{animationDuration: '3s'}}>
+            <animate attributeName="stroke-dasharray" values="0,50;50,0" dur="3s" repeatCount="indefinite"/>
+          </path>
+          <path d="M15 70 Q35 75 50 60 T85 65" stroke="url(#home-cable-flow)" strokeWidth="1.5" fill="none" className="animate-pulse" style={{animationDuration: '4s', animationDelay: '1s'}}>
+            <animate attributeName="stroke-dasharray" values="0,50;50,0" dur="4s" repeatCount="indefinite"/>
+          </path>
+          <path d="M50 20 Q50 35 50 50 Q50 65 50 80" stroke="url(#home-cable-flow)" strokeWidth="1.5" fill="none" className="animate-pulse" style={{animationDuration: '5s', animationDelay: '2s'}}>
+            <animate attributeName="stroke-dasharray" values="0,60;60,0" dur="5s" repeatCount="indefinite"/>
+          </path>
+        </svg>
+
+        {/* Network Activity Indicators */}
+        <div className="absolute inset-0">
+          {[...Array(12)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-ping opacity-60"
+              style={{
+                left: `${10 + (i * 7) % 80}%`,
+                top: `${20 + (i * 9) % 60}%`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: '2s'
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Cooling Fans */}
+        <div className="absolute top-8 right-8 w-12 h-12 border-2 border-slate-600 rounded-full">
+          <div className="absolute inset-1 border border-cyan-400/30 rounded-full animate-spin" style={{animationDuration: '2s'}}></div>
+          <div className="absolute inset-2 border border-blue-400/20 rounded-full animate-spin" style={{animationDuration: '1.5s', animationDirection: 'reverse'}}></div>
+        </div>
+
+        <div className="absolute bottom-8 left-8 w-10 h-10 border-2 border-slate-600 rounded-full">
+          <div className="absolute inset-1 border border-green-400/30 rounded-full animate-spin" style={{animationDuration: '3s'}}></div>
+          <div className="absolute inset-2 border border-blue-400/20 rounded-full animate-spin" style={{animationDuration: '2s', animationDirection: 'reverse'}}></div>
+        </div>
+
+        {/* Status LEDs */}
+        <div className="absolute top-16 left-16 flex space-x-2">
+          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          <div className="w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
+          <div className="w-2 h-2 bg-yellow-400 rounded-full animate-bounce"></div>
+        </div>
+
+        {/* Database Tables */}
+        <div className="absolute inset-0">
+          {[
+            { name: 'portfolio', x: 2, y: 5, columns: ['id', 'title', 'tech', 'status'] },
+            { name: 'skills', x: 88, y: 10, columns: ['id', 'name', 'level', 'type'] },
+            { name: 'contacts', x: 5, y: 85, columns: ['id', 'name', 'email', 'message'] },
+            { name: 'projects', x: 85, y: 80, columns: ['id', 'name', 'desc', 'link'] }
+          ].map((table, i) => (
+            <div
+              key={i}
+              className="absolute bg-slate-800/50 border border-slate-600 rounded-lg shadow-lg animate-float"
+              style={{
+                left: `${table.x}%`,
+                top: `${table.y}%`,
+                animationDelay: `${i * 1.8}s`,
+                animationDuration: `${9 + (i % 2) * 2}s`
+              }}
+            >
+              {/* Table Header */}
+              <div className="bg-slate-700 px-2 py-1 rounded-t-lg">
+                <div className="text-xs text-cyan-400 font-mono font-bold">{table.name}</div>
+              </div>
+
+              {/* Table Columns */}
+              <div className="p-1 space-y-0.5">
+                {table.columns.map((column, j) => (
+                  <div key={j} className="flex items-center space-x-1">
+                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                    <div className="text-xs text-gray-300 font-mono">{column}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Database Tables */}
+        <div className="absolute inset-0">
+          {[
+            { name: 'portfolio', x: 15, y: 25, columns: ['id', 'title', 'tech', 'status'] },
+            { name: 'skills', x: 70, y: 30, columns: ['id', 'name', 'level', 'type'] },
+            { name: 'contacts', x: 20, y: 65, columns: ['id', 'name', 'email', 'message'] },
+            { name: 'projects', x: 65, y: 70, columns: ['id', 'name', 'desc', 'link'] }
+          ].map((table, i) => (
+            <div
+              key={i}
+              className="absolute bg-slate-800/60 border border-slate-600 rounded-lg shadow-lg animate-float"
+              style={{
+                left: `${table.x}%`,
+                top: `${table.y}%`,
+                animationDelay: `${i * 1.8}s`,
+                animationDuration: `${9 + (i % 2) * 2}s`
+              }}
+            >
+              {/* Table Header */}
+              <div className="bg-slate-700 px-2 py-1 rounded-t-lg">
+                <div className="text-xs text-cyan-400 font-mono font-bold">{table.name}</div>
+              </div>
+
+              {/* Table Columns */}
+              <div className="p-1 space-y-0.5">
+                {table.columns.map((column, j) => (
+                  <div key={j} className="flex items-center space-x-1">
+                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                    <div className="text-xs text-gray-300 font-mono">{column}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Data Flow Particles */}
+        <div className="absolute inset-0">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-bounce opacity-70"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 4}s`,
+                animationDuration: `${1.5 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Background Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-900/60 to-slate-950/80"></div>
+      </div>
+
       {/* Content Wrapper with z-index */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
 
         {/* HERO – EXACTLY SEPERTI GAMBAR */}
-        <section className="flex-1 flex items-center justify-center px-6 py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section className="relative flex-1 flex items-center justify-center px-6 py-24 lg:py-32 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
           {/* Teks Kiri */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -82,11 +349,11 @@ export default function Home() {
             </p>
 
              <h1 className="text-6xl md:text-8xl font-bold leading-tight fade-in-up opacity-0 delay-400">
-              <span className="gradient-text-animated px-6 py-3 rounded-2xl">Adriano</span>
+               <span className="bg-gradient-to-r from-cyan-400 via-cyan-300 to-white bg-clip-text text-transparent px-6 py-3 rounded-2xl drop-shadow-lg" style={{filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.5))'}}>Adriano</span>
              </h1>
 
              <h2 className="text-4xl md:text-6xl font-medium text-muted-foreground fade-in-up opacity-0 delay-600">
-               And I'm a <span className="gradient-text-animated font-bold animated-border px-4 py-2 rounded-xl">Backend Developer</span>
+               And I'm a <span className="bg-gradient-to-r from-cyan-400 via-cyan-300 to-white bg-clip-text text-transparent font-bold px-4 py-2 rounded-xl drop-shadow-lg" style={{filter: 'drop-shadow(0 0 15px rgba(34, 211, 238, 0.4))'}}>Web Developer</span>
              </h2>
 
             {/* Social Icons */}
@@ -154,8 +421,8 @@ export default function Home() {
                   <Image
                     src={avatarUrl}
                     alt="Adriano – Backendtend Developer"
-                    width={550}
-                    height={700}
+                    width={400}
+                    height={500}
                     className="drop-shadow-2xl opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 filter group-hover:brightness-110"
                     priority
                   />
@@ -181,8 +448,28 @@ export default function Home() {
         </section>
 
         {/* TECH STACK / SKILLS SECTION – GANTI DARI STATS KE LOGO */}
-  <section className="py-24 md:py-32 border-y border-border bg-gradient-to-b from-background to-card/30">
-  <div className="container mx-auto px-6 max-w-6xl">
+   <section className="relative py-24 md:py-32 border-y border-border overflow-hidden">
+     {/* Subtle complementary background with gentle animation */}
+     <div className="absolute inset-0 -z-10">
+       <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 via-slate-900/20 to-blue-950/30 animate-pulse" style={{animationDuration: '8s', animationDelay: '2s'}}></div>
+
+       {/* Very subtle floating particles */}
+       <div className="absolute inset-0">
+         {[...Array(8)].map((_, i) => (
+           <div
+             key={i}
+             className="absolute w-1 h-1 bg-cyan-400/20 rounded-full animate-bounce"
+             style={{
+               left: `${20 + (i * 8)}%`,
+               top: `${30 + (i % 3) * 20}%`,
+               animationDelay: `${i * 1.5}s`,
+               animationDuration: `${3 + (i % 2)}s`
+             }}
+           />
+         ))}
+       </div>
+     </div>
+    <div className="container mx-auto px-6 max-w-6xl relative z-10">
     
     {/* Judul Optional (bisa dihapus kalau mau full logo only) */}
     <motion.div 
@@ -213,8 +500,8 @@ export default function Home() {
           whileHover={{ scale: 1.15, rotate: 5 }}
           className="group flex flex-col items-center"
         >
-          <div className="p-6 bg-card/50 rounded-3xl border border-border backdrop-blur-sm
-                          group-hover:border-primary group-hover:shadow-2xl group-hover:shadow-primary/30
+          <div className="p-6 bg-transparent rounded-3xl border-2 border-cyan-400/30 backdrop-blur-sm
+                          group-hover:border-cyan-400/60 group-hover:shadow-2xl group-hover:shadow-cyan-400/30
                           transition-all duration-300">
             <Image
               src={tech.logo}
@@ -270,7 +557,16 @@ export default function Home() {
 
         {/* FEATURES */}
       {/* WHY CHOOSE MY SERVICES → DIUBAH JADI VERSI JUJUR MAHASISWA BACKEND PEMULA */}
-<section className="py-24 md:py-32">
+<section className="relative py-24 md:py-32 overflow-hidden">
+  {/* Modern gradient background with subtle animation */}
+  <div className="absolute inset-0 -z-10">
+    <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-slate-900/25 to-cyan-950/30 animate-pulse" style={{animationDuration: '10s'}}></div>
+
+    {/* Modern geometric accents */}
+    <div className="absolute top-10 right-10 w-20 h-20 border border-cyan-400/20 rotate-45 animate-spin" style={{animationDuration: '20s'}}></div>
+    <div className="absolute bottom-20 left-10 w-16 h-16 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+    <div className="absolute top-1/2 right-20 w-12 h-12 border-2 border-blue-400/15 rotate-12 animate-pulse" style={{animationDuration: '4s'}}></div>
+  </div>
   <div className="container mx-auto px-6 max-w-6xl">
     <motion.div 
       initial={{ opacity: 0, y: 30 }} 
@@ -320,7 +616,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.15 }}
             whileHover={{ y: -10 }}
-            className="p-8 rounded-3xl border border-border bg-gradient-to-br from-card/50 to-card/30 hover:shadow-2xl hover:shadow-primary/20 transition-all backdrop-blur-sm group"
+            className="p-8 rounded-3xl border-2 border-cyan-400/30 bg-transparent hover:border-cyan-400/60 hover:shadow-2xl hover:shadow-cyan-400/20 transition-all group backdrop-blur-sm"
           >
             <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${f.color} mb-6 group-hover:scale-110 transition-transform`}>
               <Icon className="w-6 h-6 text-white" />
@@ -362,7 +658,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-3 px-10 py-5 border-2 border-primary text-primary rounded-2xl font-bold hover:bg-primary hover:text-primary-foreground transition-all text-lg"
               >
-                View Portfolio
+                View Project
               </motion.a>
             </div>
 

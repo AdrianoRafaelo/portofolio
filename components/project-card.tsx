@@ -18,7 +18,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="group h-full flex flex-col rounded-lg border border-border overflow-hidden hover:border-accent/50 transition-smooth hover:-translate-y-2 bg-card/50 hover:bg-primary/20">
+    <div className="group h-full flex flex-col rounded-lg border-2 border-cyan-400/30 overflow-hidden hover:border-cyan-400/60 transition-smooth hover:-translate-y-2 bg-transparent hover:shadow-2xl hover:shadow-cyan-400/30 backdrop-blur-sm">
       {/* Image Container */}
       <div className="relative w-full h-48 overflow-hidden bg-muted">
         <img
